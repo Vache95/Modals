@@ -1,41 +1,43 @@
-import {React,useState, useEffect, useRef} from 'react'
-import './App.scss'
+import {React, useState,useEffect} from 'react'
+import { Routes,Route } from 'react-router-dom'
+import Header from './components/header/Header'
+import Login from './components/modules/moduleRouter/Login'
+import Password from './components/modules/moduleRouter/Password'
+
 
 export default function App() {
-
-
-    const [card, setCard] = useState();
-    const inputCard = useRef();
-  
-    const handleChange = () => {
-      const cardValue = inputCard.current.value.replace(/\D/g, '').match(/(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/);
-      inputCard.current.value = !cardValue[2]
-        ? cardValue[1]
-        : `${cardValue[1]} ${cardValue[2]}${`${
-            cardValue[3] ? ` ${cardValue[3]}` : ''
-          }`}${`${cardValue[4] ? ` ${cardValue[4]}` : ''}`}`;
-      const numbers = inputCard.current.value.replace(/(\D)/g, '');
-      setCard(numbers);
-    };
-  
-    // useEffect(() => {
-    //   handleChange();
-    // }, [card]);
+   const [res,setres] = useState(false);
+   console.log(res)
+   useEffect(()=>{
+      
+      window.addEventListener('resize',function(){
+         if(window.innerWidth <= 600){
+            setres(true)
+         }
+          if(window.innerWidth >= 600){
+            setres(false)
+         }
+      }
+      )   
+   },[res])
 
  return (
-   <div className="wrapper">
-      <form className='form'>
-          <div className="form__input1">
-          <input type="text" ref={inputCard} onChange={handleChange} />
-            {/* <input type="number" /> */}
-            {/* <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx"></input> */}
-          </div>
-          <div className="form__input2">
-            <input type="number" />
-          </div>
-          <button type='submit'>SEND</button>
-      </form>
-   </div>
+    <div className="wrapper">
+       <Header/>
+       <Routes>
+         {
+          res  ?  <>
+                  <Route path='/login' element={<Login/>}/>
+                  <Route path='/password' element={<Password/>}/>
+                  </> 
+          :
+                  <>
+                  <Route path='/password' element={<Password/>}/>
+                  <Route path='/login' element={<Login/>}/>
+                  </> 
+         }
+       </Routes>
+    </div>
   )
 }
 
