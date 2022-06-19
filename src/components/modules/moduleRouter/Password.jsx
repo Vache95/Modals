@@ -9,6 +9,7 @@ export default function Password() {
   const location = useLocation()
   console.log(location)
   const goBack = () => navigate(-1)
+
   return (
     <div className='popup'>
       <div className="popup__container">

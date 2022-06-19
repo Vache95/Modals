@@ -1,3 +1,6 @@
+.popup__cl{
+  display: none;
+}
 .popup{
     position: fixed;
     top: 0;
@@ -12,6 +15,7 @@
     justify-content: center;
     .popup__container{
       position: relative;
+      z-index: 999;
       width: 500px;
       height: 600px;
       background-color: #fff;

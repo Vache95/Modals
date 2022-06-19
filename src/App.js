@@ -7,7 +7,6 @@ import Password from './components/modules/moduleRouter/Password'
 
 export default function App() {
    const [res,setres] = useState(false);
-   console.log(res)
    useEffect(()=>{
       
       window.addEventListener('resize',function(){
@@ -23,7 +22,7 @@ export default function App() {
 
  return (
     <div className="wrapper">
-       <Header/>
+       <Header />
        <Routes>
          {
           res  ?  <>
